@@ -1,0 +1,7 @@
+Isolated
+3
+# FairRide
+# OpuS
+# None
+#Isolated
+# 5 the number only useful for the mode of None.
