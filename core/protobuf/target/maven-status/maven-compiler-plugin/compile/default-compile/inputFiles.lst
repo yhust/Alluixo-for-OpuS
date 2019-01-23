@@ -1,0 +1,9 @@
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/core/protobuf/src/main/java/alluxio/proto/journal/Journal.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/core/protobuf/src/main/java/alluxio/proto/journal/KeyValue.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/core/protobuf/src/main/java/alluxio/util/proto/ProtoUtils.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/core/protobuf/src/main/java/alluxio/proto/journal/File.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/core/protobuf/src/main/java/alluxio/proto/status/Status.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/core/protobuf/src/main/java/alluxio/util/proto/ProtoMessage.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/core/protobuf/src/main/java/alluxio/proto/dataserver/Protocol.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/core/protobuf/src/main/java/alluxio/proto/journal/Lineage.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/core/protobuf/src/main/java/alluxio/proto/journal/Block.java

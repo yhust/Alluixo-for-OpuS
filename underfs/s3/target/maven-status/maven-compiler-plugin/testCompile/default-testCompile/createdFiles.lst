@@ -1,0 +1,4 @@
+alluxio/underfs/s3/S3UtilsTest.class
+alluxio/underfs/s3/S3UnderFileSystemTest.class
+alluxio/underfs/s3/S3UnderFileSystemFactoryTest.class
+alluxio/underfs/s3/S3InputStreamTest.class

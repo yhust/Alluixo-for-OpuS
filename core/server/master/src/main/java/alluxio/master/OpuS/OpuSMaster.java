@@ -2,20 +2,20 @@ package alluxio.master.OpuS;
 
 
 import alluxio.AlluxioURI;
-import alluxio.master.OpuS.UserFilePair;
-import alluxio.PropertyKey;
-import com.google.common.util.concurrent.UncheckedExecutionException;
-import com.google.common.util.concurrent.UncheckedTimeoutException;
-import org.apache.commons.logging.Log;
+import alluxio.Constants;
+import alluxio.client.ReadType;
+import alluxio.client.file.FileInStream;
+import alluxio.client.file.FileSystem;
+import alluxio.client.file.options.FreeOptions;
+import alluxio.client.file.options.OpenFileOptions;
+import com.google.common.io.Closer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -24,6 +24,7 @@ import java.util.*;
 public class OpuSMaster extends TimerTask{
 
   private static final Logger LOG = LoggerFactory.getLogger(OpuSMaster.class);
+  private static final String AlluxioFolder = "/test";
   private static final String CONFNAME = "opus.txt";
   public static final String NONE = "None"; //LRU
   public static final String ISOLATED = "Isolated";  // totally isolated, only ask for isolated allocation
@@ -281,6 +282,46 @@ public class OpuSMaster extends TimerTask{
       stdInput.close();
     } catch (Exception e ) { LOG.info("Wrong Message received: " + result);return;}
     LOG.info("runOpuS finishes");
+    cacheOrFree();
+  }
+
+
+  /**
+   *  Cache or free files based on the cachedRatio
+   *
+   */
+  private static void cacheOrFree(){
+    FileSystem fileSystem = FileSystem.Factory.get();
+    for(Map.Entry<AlluxioURI, Double> entry: fileLibrary.entrySet()){
+      AlluxioURI alluxioURI = entry.getKey();
+      Double cachedRatio = entry.getValue();
+      try {
+        int inMemoryPercentage = fileSystem.getStatus(alluxioURI).getInMemoryPercentage();
+
+        if(cachedRatio>0 && inMemoryPercentage<100){ // do full load
+          OpenFileOptions options = OpenFileOptions.defaults().setReadType(ReadType.CACHE_PROMOTE);
+          Closer closer = Closer.create();
+          try {
+            FileInStream in = closer.register(fileSystem.openFile(alluxioURI, options));
+            byte[] buf = new byte[8 * Constants.MB];
+            while (in.read(buf) != -1) {} // read the file with "Cache_promote" option
+          } catch (Exception e) {
+            throw closer.rethrow(e);
+          } finally {
+            closer.close();
+          }
+          System.out.println("File " + alluxioURI + " has been loaded.");
+        }
+
+
+        if(cachedRatio==0 && inMemoryPercentage>0){ // do full free
+          fileSystem.free(alluxioURI, FreeOptions.defaults());
+          System.out.println("File " + alluxioURI + " has been freed.");
+        }
+      }catch(Exception e){
+        e.printStackTrace();
+      }
+    }
   }
 
   public synchronized static void flushUserLogs(){

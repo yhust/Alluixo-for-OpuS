@@ -1,0 +1,6 @@
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/keyvalue/hadoop/src/main/java/alluxio/hadoop/mapreduce/KeyValueOutputCommitter.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/keyvalue/hadoop/src/main/java/alluxio/hadoop/mapreduce/KeyValueRecordWriter.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/keyvalue/hadoop/src/main/java/alluxio/hadoop/mapreduce/KeyValueInputSplit.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/keyvalue/hadoop/src/main/java/alluxio/hadoop/mapreduce/KeyValueInputFormat.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/keyvalue/hadoop/src/main/java/alluxio/hadoop/mapreduce/KeyValueRecordReader.java
+/Users/yuyinghao/research/repo_in_papers/Alluixo-for-OpuS/keyvalue/hadoop/src/main/java/alluxio/hadoop/mapreduce/KeyValueOutputFormat.java
